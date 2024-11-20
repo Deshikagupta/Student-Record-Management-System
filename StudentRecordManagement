@@ -1,0 +1,76 @@
+#include <iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+// Define the Student class
+class Student {
+public:
+    string name;
+    string enrollmentNumber;
+    string phoneNumber;
+    string branch;
+
+    // Constructor
+    Student(string n, string e, string p, string b)
+        : name(n), enrollmentNumber(e), phoneNumber(p), branch(b) {}
+};
+
+// Function to display a student's details
+void displayStudent(const Student& student) {
+    cout << "Name: " << student.name << endl;
+    cout << "Enrollment Number: " << student.enrollmentNumber << endl;
+    cout << "Phone Number: " << student.phoneNumber << endl;
+    cout << "Branch: " << student.branch << endl;
+    cout << "-----------------------------" << endl;
+}
+
+// Main function
+int main() {
+    vector<Student> students; // Vector to store students' records
+    int choice;
+
+    do {
+        cout << "\nStudent Record Management System" << endl;
+        cout << "1. Add Student Record" << endl;
+        cout << "2. View All Records" << endl;
+        cout << "3. Exit" << endl;
+        cout << "Enter your choice: ";
+        cin >> choice;
+        cin.ignore(); // Clear input buffer
+
+        if (choice == 1) {
+            string name, enrollmentNumber, phoneNumber, branch;
+
+            cout << "Enter Student Name: ";
+            getline(cin, name);
+            cout << "Enter Enrollment Number: ";
+            getline(cin, enrollmentNumber);
+            cout << "Enter Phone Number: ";
+            getline(cin, phoneNumber);
+            cout << "Enter Branch: ";
+            getline(cin, branch);
+
+            // Add a new student record
+            students.emplace_back(name, enrollmentNumber, phoneNumber, branch);
+            cout << "Record added successfully!" << endl;
+
+        } else if (choice == 2) {
+            if (students.empty()) {
+                cout << "No records found!" << endl;
+            } else {
+                cout << "\nAll Student Records:\n";
+                for (const auto& student : students) {
+                    displayStudent(student);
+                }
+            }
+        } else if (choice == 3) {
+            cout << "Exiting the program..." << endl;
+        } else {
+            cout << "Invalid choice. Please try again." << endl;
+        }
+    } while (choice != 3);
+
+    return 0;
+}
